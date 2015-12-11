@@ -22,7 +22,7 @@ function varargout = LexyRobotGUI(varargin)
 
 % Edit the above text to modify the response to help LexyRobotGUI
 
-% Last Modified by GUIDE v2.5 10-Dec-2015 21:12:53
+% Last Modified by GUIDE v2.5 11-Dec-2015 01:33:14
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -77,9 +77,14 @@ nPorts = length(serialPorts.SerialPorts);
 set(handles.menuportarduino, 'String', ...
     [{'Select a port'} ; serialPorts.SerialPorts ]);
 
-% Create Map
+% Map
 handles.sizeMap = 40;
-handles.map = zeros(handles.sizeMap);
+handles.map = [];
+
+% Path Planning
+handles.start = [0,0];
+handles.goal = [0,0];
+
 
 % Update handles structure
 guidata(hObject, handles);
@@ -373,6 +378,9 @@ function statusRobot_update(hObject, eventdata, handles)
     set(handles.ypos,'String',num2str(y));
     set(handles.zpos,'String',num2str(z));
     
+    set(handles.editposx,'String',num2str(x));
+    set(handles.editposy,'String',num2str(y));
+    
     finalOrientation = tr2rpy(finalTransformation, 'deg');
     
     roll = finalOrientation(1);
@@ -502,7 +510,7 @@ function btnPath_Callback(hObject, eventdata, handles)
 
 try
     figure;
-    handles.prm.plot();
+    handles.pathmap.plot();
 catch ME
     errordlg('Map Not find!');
 end
@@ -527,21 +535,192 @@ fig = gca;
 
 % Open Map editor
 mapFig = figure;
-handles.map = makemap(20);
-
+handles.map = makemap(handles.sizeMap);
 uiwait(mapFig);
-handles.prm = PRM(handles.map);
 
+% Create a Basic Map
+handles.pathmap = PRM(handles.map);
+
+% Select previews Axis
 axes(fig);
+
+% Status message
+set(handles.textRobotModel,'String', 'Map Edited!');
 
 % Update handles structure
 guidata(hObject, handles);
 
 
+% --- Executes on button press in btnDstart.
+function btnSetStartGoal_Callback(hObject, eventdata, handles)
+% hObject    handle to btnDstart (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Set Start Point
+startX = str2num(get(handles.editStartX,'String'));
+startY = str2num(get(handles.editStartY,'String'));
+handles.start = [startX,startY];
+
+% Set Goal Point
+goalX = str2num(get(handles.editGoalX,'String'));
+goalY = str2num(get(handles.editGoalY,'String'));
+handles.goal = [goalX,goalY];
+
+set(handles.textRobotModel,'String', 'Start and Goal Defined!');
+
+% Update handles structure
+guidata(hObject, handles);
+
+% --- Executes on button press in btnDstart.
+function btnDstart_Callback(hObject, eventdata, handles)
+% hObject    handle to btnDstart (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% Calculate Path D*
+ds = Dstar(handles.map);
+ds.plan(handles.goal);
+figure;
+ds.path(handles.start);
+handles.ds = ds;
+
+handles.pathmap = handles.ds;
+
+set(handles.textRobotModel,'String', 'D* Path Created!');
+
+% Update handles structure
+guidata(hObject, handles);
+
+% --- Executes on button press in btnPRM.
+function btnPRM_Callback(hObject, eventdata, handles)
+% hObject    handle to btnPRM (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% Calculate Path PRM
+prm = PRM(handles.map);
+prm.plan();
+figure;
+prm.path(handles.start,handles.goal);
+handles.prm = prm;
+
+set(handles.textRobotModel,'String', 'PRM Path Created!');
+
+handles.pathmap = handles.prm;
+
+% Update handles structure
+guidata(hObject, handles);
+
+
+function editStartX_Callback(hObject, eventdata, handles)
+% hObject    handle to editStartX (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editStartX as text
+%        str2double(get(hObject,'String')) returns contents of editStartX as a double
+
+
 % --- Executes during object creation, after setting all properties.
-function axesMap_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to axesMap (see GCBO)
+function editStartX_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editStartX (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: place code in OpeningFcn to populate axesMap
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editStartY_Callback(hObject, eventdata, handles)
+% hObject    handle to editStartY (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editStartY as text
+%        str2double(get(hObject,'String')) returns contents of editStartY as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editStartY_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editStartY (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGoalX_Callback(hObject, eventdata, handles)
+% hObject    handle to editGoalX (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGoalX as text
+%        str2double(get(hObject,'String')) returns contents of editGoalX as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGoalX_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGoalX (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+function editGoalY_Callback(hObject, eventdata, handles)
+% hObject    handle to editGoalY (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGoalY as text
+%        str2double(get(hObject,'String')) returns contents of editGoalY as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGoalY_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGoalY (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+% --- Executes on button press in btnRunPath.
+function btnRunPath_Callback(hObject, eventdata, handles)
+% hObject    handle to btnRunPath (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+    set(handles.textRobotModel,'String', 'Preparing...');
+
+    handles.X = -1;
+    handles.Y = 4;
+    
+    handles.mRobot.penUpDown(handles.mRobot.PEN_UP);
+    newQ = handles.mRobot.ikine(handles.X, handles.Y);
+    handles.mRobot.moveSync(newQ);
+    
+    statusRobot_update(hObject, eventdata, handles);
+    
+    % Generate Path Curve file
+    
+    % Draw Path Curve
+    
+    
+    % Update Status
+    statusRobot_update(hObject, eventdata, handles);
+    set(handles.textRobotModel,'String', 'Done');
