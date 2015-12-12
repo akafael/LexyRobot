@@ -3,7 +3,7 @@ classdef lexyRobot
     % LEXY_ROBOT functions for robot
     
     properties
-    	name = 'Lexy Robot'     % Robot Name
+        name = 'Lexy Robot'     % Robot Name
         robotModel;             % Model Representation
         robotArduino;           % Harware Connection
         mArduino;               % Arduino Library
@@ -11,8 +11,16 @@ classdef lexyRobot
         this                    % Reference for the object
 
         %% DH Parameters (inch, radians)
-        dhLink1 = struct('a',4.534 , 'd',1.86 , 'alpha',0);
-        dhLink2 = struct('a',4.225 , 'd',0.71 , 'alpha',0);
+        % dhLink1 = struct('a',4.534 , 'd',1.86 , 'alpha',0);
+        % dhLink2 = struct('a',4.225 , 'd',0.71 , 'alpha',0);
+        
+        %% DH Parameters (cm , radians)
+        dhLink1 = struct('a',11.51 , 'd',4.72 , 'alpha',0);
+        dhLink2 = struct('a',10.75 , 'd',1.80 , 'alpha',0);
+        
+        %% DH Parameters (mm , radians)
+        % dhLink1 = struct('a',115.1 , 'd',47.2 , 'alpha',0);
+        % dhLink2 = struct('a',107.5 , 'd',18.0 , 'alpha',0);
 
         %% Robot State Variables
         robotPos = [pi/2 pi/2];         % Current joint angles
@@ -264,7 +272,6 @@ classdef lexyRobot
              end
         end
         
-
         function drawWord(obj,msg,scale)
             % msg String to Draw
             % scale letter height
@@ -274,6 +281,21 @@ classdef lexyRobot
                 q = obj.robotModel.getpos();
                 obj.moveFast(q);
             end
+        end
+        
+        function drawCurve(obj,curve)
+            obj.robotToolkitDisp(['Preparing...',char]);
+            obj.penUpDown(obj.PEN_UP);
+            
+            obj.robotToolkitDisp(['Drawing curve',char]);
+            % Plot Curve
+            for i = 1:size(curve,1)
+                q = obj.ikine(curve(i,1),curve(i,2));
+                obj.moveFast(q);
+                obj.penUpDown(obj.PEN_DOWN);
+            end
+            
+            obj.penUpDown(obj.PEN_UP);
         end
         
         function q1 = ikine(obj,X,Y)

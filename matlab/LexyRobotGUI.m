@@ -78,12 +78,13 @@ set(handles.menuportarduino, 'String', ...
     [{'Select a port'} ; serialPorts.SerialPorts ]);
 
 % Map
-handles.sizeMap = 40;
+handles.sizeMap = 20;
 handles.map = [];
 
 % Path Planning
 handles.start = [0,0];
 handles.goal = [0,0];
+handles.zeroMap = [1,1]
 
 
 % Update handles structure
@@ -508,10 +509,12 @@ function btnPath_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+mapFig = figure;
+
 try
-    figure;
     handles.pathmap.plot();
 catch ME
+    close(mapFig);
     errordlg('Map Not find!');
 end
 
@@ -565,7 +568,7 @@ handles.start = [startX,startY];
 % Set Goal Point
 goalX = str2num(get(handles.editGoalX,'String'));
 goalY = str2num(get(handles.editGoalY,'String'));
-handles.goal = [goalX,goalY];
+handles.goal = [goalX,goalY] - handles.zeroMap;
 
 set(handles.textRobotModel,'String', 'Start and Goal Defined!');
 
@@ -580,8 +583,9 @@ function btnDstart_Callback(hObject, eventdata, handles)
 % Calculate Path D*
 ds = Dstar(handles.map);
 ds.plan(handles.goal);
+handles.path = ds.path(handles.start)
 figure;
-ds.path(handles.start);
+ds.plot();
 handles.ds = ds;
 
 handles.pathmap = handles.ds;
@@ -599,8 +603,9 @@ function btnPRM_Callback(hObject, eventdata, handles)
 % Calculate Path PRM
 prm = PRM(handles.map);
 prm.plan();
+handles.path = prm.path(handles.start,handles.goal)
 figure;
-prm.path(handles.start,handles.goal);
+prm.plot();
 handles.prm = prm;
 
 set(handles.textRobotModel,'String', 'PRM Path Created!');
@@ -706,20 +711,27 @@ function btnRunPath_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
     set(handles.textRobotModel,'String', 'Preparing...');
-
-    handles.X = -1;
-    handles.Y = 4;
     
-    handles.mRobot.penUpDown(handles.mRobot.PEN_UP);
-    newQ = handles.mRobot.ikine(handles.X, handles.Y);
-    handles.mRobot.moveSync(newQ);
+    % Generate Path Curve
+    scale = 1;
     
-    statusRobot_update(hObject, eventdata, handles);
-    
-    % Generate Path Curve file
+    path = handles.path;
+    path(:,1) = scale*path(:,1) + handles.zeroMap(1);
+    path(:,2) = scale*path(:,2) + handles.zeroMap(2);
     
     % Draw Path Curve
+    set(handles.textRobotModel,'String', 'Drawing Path Curve.');
     
+    mapFig = figure;
+    handles.pathmap.plot();
+    for i = 1:size(path,1)
+        q = handles.mRobot.ikine(path(i,1),path(i,2));
+        handles.mRobot.moveFast(q);
+        handles.mRobot.penUpDown(handles.mRobot.PEN_DOWN);
+        statusRobot_update(hObject, eventdata, handles);
+    end
+    
+    mapFig.delete();
     
     % Update Status
     statusRobot_update(hObject, eventdata, handles);

@@ -8,14 +8,23 @@ function mRobot = testLexyRobot()
 	mRobot.printName();
     
     % Connect Arduino
-    %mRobot.robotArduino = mRobot.connectArduino('COM4');
+    mRobot.robotArduino = mRobot.connectArduino('/dev/ttyACM0');
+    mRobot.isConnected2Arduino = true;
     
+    % Start Simulation
+    mRobot.robotModel.plot([pi/2 pi/2]);
+    
+    %testMove(mRobot);
     %testCalibrationMove(mRobot);
     %testInverseKinematics(mRobot,3,4);
     %testDrawSquare(mRobot);
     %testDrawWord(mRobot,'RAFAEL',3)
     %testSizeLetter(mRobot);
     testPlottingMap();
+    %testDrawingPath(mRobot);
+    
+    % Disconnect Arduino
+    mRobot.disconnectArduino();
 end
 
 function testMove(mRobot)
@@ -37,7 +46,7 @@ function testMove(mRobot)
     
     % Using Both combined
     q1 = [pi/2 pi/2];
-    mRobot.move(q1);
+    mRobot.moveFast(q1);
 end
 
 function testCalibrationMove(mRobot)
@@ -185,8 +194,39 @@ end
 function testPlottingMap()
     map = makemap(20)
     
-    prm = PRM(map)
+    ds = Dstar(map);
     figure;
-    prm.plot();
+    ds.plot();
+end
+
+function testDrawingPath(mRobot)
+    % Create Map
+    res = 20
+    map = makemap(res)
     
+    % Calculate Path base on this coordinates
+    start = [2,18]
+    goal = [18,2]
+    
+    ds = Dstar(map);
+    ds.plan(goal);
+    
+    figure;
+    path = ds.path(start);
+    
+    posX = 1;
+    posY = 1;
+    scale = 5/res
+    
+    q = mRobot.ikine(posX,posY);
+    mRobot.penUpDown(mRobot.PEN_UP);
+    mRobot.robotModel.plot(mRobot.robotPos);
+    mRobot.moveFast(q);
+    
+    mRobot.robotToolkitDisp(['Drawing Path ',char]);
+    
+    path(:,1) = scale*path(:,1) + posX
+    path(:,2) = scale*path(:,2) + posY
+    
+    mRobot.drawCurve(path);
 end
