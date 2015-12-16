@@ -14,7 +14,7 @@ Arduino Robotic Arm with 2 degrees of freedom controled by Matlab. Project dever
 
 ### References
  - Software
-  - [Matlab Robotic Toolbox](http://petercorke.com/Robotics_Toolbox.html) Toolbox created by @petercorke
+  - [Matlab Robotic Toolbox](http://petercorke.com/Robotics_Toolbox.html) Toolbox created by [@petercorke](https://github.com/petercorke)
   - [ArduinoIO](https://www.mathworks.com/hardware-support/arduino-matlab.html?requestedDomain=www.mathworks.com) Arduino Legacy Support for Matlab
   - [Object Oriented Programing on Matlab](https://www.mathworks.com/company/newsletters/articles/introduction-to-object-oriented-programming-in-matlab.html) Some OO concepts that I tried to use.
   - [Pen](https://www.mathworks.com/matlabcentral/fileexchange/26225-pen---mouse-draw-input-template) Pen / Mouse draw input template
