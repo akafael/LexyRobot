@@ -7,10 +7,10 @@ Arduino Robotic Arm with 2 degrees of freedom controled by Matlab. Project dever
  - [matlab](https://github.com/akafael/LexyRobot/tree/master/matlab)
    - [letters](https://github.com/akafael/LexyRobot/tree/master/matlab/letters): Generated handwriting letters .mat files
    - [pen](https://github.com/akafael/LexyRobot/tree/master/matlab/pen): Pen Script files
-   - [lexyRobot.mat](https://github.com/akafael/LexyRobot/tree/master/matlab/lexyRobot.mat) : Robot Class
-   - [lexyRobotGUI.fig](https://github.com/akafael/LexyRobot/tree/master/matlab/lexyRobotGUI.fig) : Matlab GUI Figure file
-   - [lexyRobotGUI.mat](https://github.com/akafael/LexyRobot/tree/master/matlab/lexyRobotGUI.mat) : Matlab GUI Script file
-   - [testLexyRobot.mat](https://github.com/akafael/LexyRobot/tree/master/matlab/testLexyRobot.mat) : Matlab Script for testing
+   - [lexyRobot.mat](https://github.com/akafael/LexyRobot/blob/master/matlab/lexyRobot.mat) : Robot Class
+   - [lexyRobotGUI.fig](https://github.com/akafael/LexyRobot/blob/master/matlab/lexyRobotGUI.fig) : Matlab GUI Figure file
+   - [lexyRobotGUI.mat](https://github.com/akafael/LexyRobot/blob/master/matlab/lexyRobotGUI.mat) : Matlab GUI Script file
+   - [testLexyRobot.mat](https://github.com/akafael/LexyRobot/blob/master/matlab/testLexyRobot.mat) : Matlab Script for testing
 
 ### References
  - Software
