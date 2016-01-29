@@ -24,10 +24,6 @@ Arduino Robotic Arm with 2 degrees of freedom controled by Matlab. Project dever
  - Draw Words
  - Path Planning (DStar and PRM)
 
-## Path Planning 
-
-![Path Planning](https://raw.githubusercontent.com/akafael/LexyRobot/master/doc/img/drawPath.png)
-
 ### References
  - Software
   - [Matlab Robotic Toolbox](http://petercorke.com/Robotics_Toolbox.html) Toolbox created by [@petercorke](https://github.com/petercorke)
