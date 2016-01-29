@@ -12,7 +12,19 @@ Arduino Robotic Arm with 2 degrees of freedom controled by Matlab. Project dever
    - [lexyRobotGUI.mat](https://github.com/akafael/LexyRobot/blob/master/matlab/lexyRobotGUI.mat) : Matlab GUI Script file
    - [testLexyRobot.mat](https://github.com/akafael/LexyRobot/blob/master/matlab/testLexyRobot.mat) : Matlab Script for testing
 
-### References
+## LexyRobot GUI
+
+![LexyRobotGUI](https://raw.githubusercontent.com/akafael/LexyRobot/master/doc/img/lexyRobotGUI.png)
+
+### Features
+
+ - Scan COM ports and perform Connection
+ - Inverse and Direct Kinematics
+ - Control trough angle and coordinates in cm
+ - Draw Words
+ - Path Planning (DStar and PRM)
+
+## Reference
  - Software
   - [Matlab Robotic Toolbox](http://petercorke.com/Robotics_Toolbox.html) Toolbox created by [@petercorke](https://github.com/petercorke)
   - [ArduinoIO](https://www.mathworks.com/hardware-support/arduino-matlab.html?requestedDomain=www.mathworks.com) Arduino Legacy Support for Matlab
