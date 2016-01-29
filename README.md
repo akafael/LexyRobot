@@ -24,7 +24,7 @@ Arduino Robotic Arm with 2 degrees of freedom controled by Matlab. Project dever
  - Draw Words
  - Path Planning (DStar and PRM)
 
-### References
+## Reference
  - Software
   - [Matlab Robotic Toolbox](http://petercorke.com/Robotics_Toolbox.html) Toolbox created by [@petercorke](https://github.com/petercorke)
   - [ArduinoIO](https://www.mathworks.com/hardware-support/arduino-matlab.html?requestedDomain=www.mathworks.com) Arduino Legacy Support for Matlab
