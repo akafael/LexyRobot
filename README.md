@@ -17,17 +17,17 @@ Arduino Robotic Arm with 2 degrees of freedom controled by MATLAB based on Ardui
 ![LexyRobotGUI](https://raw.githubusercontent.com/akafael/LexyRobot/master/doc/img/lexyRobotGUI.png)
 
 
-## Robot Image
-
-![LexyRobot Hardware](https://github.com/akafael/LexyRobot/raw/master/doc/img/lexyRobotHardware.png)
-
-### Features
+### Features GUI
 
  - Scan COM ports and perform Connection
  - Inverse and Direct Kinematics
  - Control trough angle and coordinates in cm
  - Draw Words
  - Path Planning (DStar and PRM)
+
+## Robot Image
+
+![LexyRobot Hardware](https://github.com/akafael/LexyRobot/raw/master/doc/img/lexyRobotHardware.png)
 
 ## Reference
  - Software
