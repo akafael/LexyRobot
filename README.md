@@ -1,7 +1,7 @@
 LexyRobot
 =========
 
-Arduino Robotic Arm with 2 degrees of freedom controled by MATLAB. Project deverloped with Chris Zachariah as part of the course ECE 5995 Introduction to Robotics at Wayne State with [Dr Abhilash Pandya](http://ece.eng.wayne.edu/~apandya/). Documentation available in the [Repository Wiki Page](https://github.com/akafael/LexyRobot/wiki)
+Arduino Robotic Arm with 2 degrees of freedom controled by MATLAB based on Arduino. Project deverloped with Chris Zachariah as part of the course ECE 5995 Introduction to Robotics at Wayne State with [Dr Abhilash Pandya](http://ece.eng.wayne.edu/~apandya/). Documentation available in the [Repository Wiki Page](https://github.com/akafael/LexyRobot/wiki)
 
 ## Folder Organization
  - [matlab](https://github.com/akafael/LexyRobot/tree/master/matlab)
@@ -15,6 +15,11 @@ Arduino Robotic Arm with 2 degrees of freedom controled by MATLAB. Project dever
 ## LexyRobot GUI
 
 ![LexyRobotGUI](https://raw.githubusercontent.com/akafael/LexyRobot/master/doc/img/lexyRobotGUI.png)
+
+
+## Robot Image
+
+![LexyRobot Hardware](https://github.com/akafael/LexyRobot/raw/master/doc/img/lexyRobotHardware.png)
 
 ### Features
 
