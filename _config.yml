@@ -1,0 +1,8 @@
+title: Lexyrobot
+description: Robotic Arm controled by Arduino with 2 Degrees of freedom
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-architect
+
+gems:
+  - jekyll-mentions
