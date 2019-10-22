@@ -1,7 +1,7 @@
 LexyRobot
 =========
 
-Arduino Robotic Arm with 2 degrees of freedom controled by MATLAB based on Arduino. Project deverloped with Chris Zachariah as part of the course ECE 5995 Introduction to Robotics at Wayne State with [Dr Abhilash Pandya](http://ece.eng.wayne.edu/~apandya/). Documentation available in the [Repository Wiki Page](https://github.com/akafael/LexyRobot/wiki)
+Arduino Robotic Arm with 2 degrees of freedom controled by MATLAB. Project deverloped with Chris Zachariah as part of the course ECE 5995 Introduction to Robotics at Wayne State from [Dr Abhilash Pandya](http://ece.eng.wayne.edu/~apandya/). Documentation available at [Repository Wiki Page](https://github.com/akafael/LexyRobot/wiki)
 
 ## Folder Organization
  - [matlab](https://github.com/akafael/LexyRobot/tree/master/matlab)
@@ -30,12 +30,12 @@ Arduino Robotic Arm with 2 degrees of freedom controled by MATLAB based on Ardui
 ![LexyRobot Hardware](https://github.com/akafael/LexyRobot/raw/master/doc/img/lexyRobotHardware.png)
 
 ## Reference
- - Software
+### Software
   - [Matlab Robotic Toolbox](http://petercorke.com/Robotics_Toolbox.html) Open Source Toolbox created by [@petercorke](https://github.com/petercorke)
   - [ArduinoIO](https://www.mathworks.com/hardware-support/arduino-matlab.html?requestedDomain=www.mathworks.com) Arduino Legacy Support for Matlab
   - [Object Oriented Programing on Matlab](https://www.mathworks.com/company/newsletters/articles/introduction-to-object-oriented-programming-in-matlab.html) Concepts used in the project
   - [Pen](https://www.mathworks.com/matlabcentral/fileexchange/26225-pen---mouse-draw-input-template) Pen / Mouse draw input template modified for this project
 
- - Related Videos
+### Related Videos
   - [Robotic Theory](https://www.youtube.com/watch?v=0yD3uBshJB0&list=PL65CC0384A1798ADF)
   - [Project Results](https://www.youtube.com/watch?v=L9-bt8S9pyk&list=PLLVv9YVxXD97kZRXK5z1hEUbqRAv6iZf2)
