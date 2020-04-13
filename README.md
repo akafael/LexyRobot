@@ -4,13 +4,13 @@ LexyRobot
 Arduino Robotic Arm with 2 degrees of freedom controled by MATLAB. Project deverloped with Chris Zachariah as part of the course ECE 5995 Introduction to Robotics at Wayne State from [Dr Abhilash Pandya](http://ece.eng.wayne.edu/~apandya/). Documentation available at [Repository Wiki Page](https://github.com/akafael/LexyRobot/wiki)
 
 ## Folder Organization
- - [matlab](https://github.com/akafael/LexyRobot/tree/master/matlab)
-   - [letters](https://github.com/akafael/LexyRobot/tree/master/matlab/letters): Generated handwriting letters .mat files
-   - [pen](https://github.com/akafael/LexyRobot/tree/master/matlab/pen): Pen Script files
-   - [lexyRobot.mat](https://github.com/akafael/LexyRobot/blob/master/matlab/lexyRobot.mat) : Robot Class
-   - [lexyRobotGUI.fig](https://github.com/akafael/LexyRobot/blob/master/matlab/lexyRobotGUI.fig) : Matlab GUI Figure file
-   - [lexyRobotGUI.mat](https://github.com/akafael/LexyRobot/blob/master/matlab/lexyRobotGUI.mat) : Matlab GUI Script file
-   - [testLexyRobot.mat](https://github.com/akafael/LexyRobot/blob/master/matlab/testLexyRobot.mat) : Matlab Script for testing
+ - [matlab](matlab)
+   - [letters](matlab/letters): Generated handwriting letters .mat files
+   - [pen](matlab/pen): Pen Script files
+   - [lexyRobot.m](matlab/lexyRobot.mat) : Robot Class
+   - [LexyRobotGUI.fig](matlab/LexyRobotGUI.fig) : Matlab GUI Figure file
+   - [LexyRobotGUI.m](matlab/LexyRobotGUI.m) : Matlab GUI Script file
+   - [testLexyRobot.m](matlab/testLexyRobot.m) : Matlab Script for unitary function testing
 
 ## LexyRobot GUI
 
